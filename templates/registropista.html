@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+
+<!--Header-->
+{% block header %}
+    <h3 class=seccion>Aquí se puede reservar una pista</h3>
+    {% if error %}
+        <h3 class=seccion style="color: white; background-color: red;">{{error}}</h3>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+</th><th></th><th></th></thead>
+    <form name="reserva" method="get" action="{{url_for('reservar')}}">
+        <h3> Horario</h3>
+            <div>
+                <span>
+                    <label for="dia">Dia:</label>
+                    <input type="date" data-provide="datepicker" id="dia" name="dia">
+                </span>
+                <br>
+                <span>
+                    <label for="hora">Hora:</label>
+                    <input type="number" step="1" max="20" min="15" name="hora" id="hora" required>
+                </span>
+            </div>
+        <h3> Tipo de pista</h3>
+            <div class="form-check form-check-inline">
+                <select name="tipopista" id="tipopista">
+                    {% for tipo in tiposPista %}
+                        <option value="{{tipo['idpista']}}">{{tipo['tipo']}} - {{tipo['preu']}}€</option>
+                    {% endfor %}
+                </select>
+            </div>
+        <h3> Usuario</h3>
+            <div>
+                <select name="usuario" id="usuario">
+                    {% for usuario in usuarios %}
+                        <option value="{{usuario['idclient']}}">{{usuario['nom']}} {{usuario['llinatges']}}</option>
+                    {% endfor %}
+                </select> 
+            </div>
+            <input type="submit" value="Enviar" name="enviar" style="margin-right: 5px; width: 60px; height:30px; font-weight: bold">
+            <input type="reset" value="Limpiar" style="width: 60px; height:30px; font-weight: bold">
+    </form>
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

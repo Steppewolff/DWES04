@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tarea DWES03</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='img/fgromano.ico') }}">
+
+<!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+<!-- Bootstrap -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<!-- Fuentes -->
+    <link href="//db.onlinewebfonts.com/c/f2ecc6ef740fcf60de095b0b087dd58d?family=OCR+A+Extended" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <nav class="main-menu">
+        <ul>
+            <li class="has-subnav">
+                <a href="{{ url_for('formulario') }}">
+                    <i class="fa fa-file-text-o fa-2x"></i>
+                    <span class="nav-text">
+                        Reservar pista
+                    </span>
+                </a>
+            </li>
+            <li class="has-subnav">
+                <a href="{{ url_for('reservaspista') }}">
+                    <i class="fa fa-folder-open fa-2x"></i>
+                    <span class="nav-text">
+                        Ver reservas
+                    </span>
+                </a>
+            </li>
+            <li class="has-subnav">
+                <a href="{{ url_for('usuarios') }}">
+                    <i class="fa fa-folder-open fa-2x"></i>
+                    <span class="nav-text">
+                        Gestionar usuarios
+                    </span>
+                </a>
+            </li>        </ul>
+    </nav>
+    <!--Header-->
+    <header>
+        <h1 id=titulo>Reserva de Pistas con MySQL</h1>
+        <h2 id=titulo>Tarea DAWES03</h2>
+        {% block header %}{% endblock %}
+    </header>
+    <!--Main-->
+    <main>
+        <div class="row">
+            <div class="col-sm-4">
+                <form action="{{url_for('formulario')}}" method="get">
+                    <button type="submit" class="btn btn-primary">Nueva reserva</button>
+               </form>
+            </div>
+            <div class="col-sm-4">
+                <form action="{{url_for('reservaspista')}}" method="get">
+                    <button type="submit" class="btn btn-primary">Ver reservas</button>
+                </form>
+            </div>
+            <div class="col-sm-4">
+                <form action="{{url_for('usuarios')}}" method="get">
+                    <button type="submit" class="btn btn-primary">Usuarios</button>
+                </form>
+            </div>        </div>
+        {% block main %}{% endblock %}
+    </main>
+    <!--Footer-->
+    <footer>
+        <div class="sign nombre">
+            <p>Web desarrollada por Fernando Gómez Romano <span class="copy-left">©</span></p>
+        </div>
+        {% block footer %}{% endblock %}
+    </footer>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>    
+</body>
+</html>

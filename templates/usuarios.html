@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+
+{% block header %}
+    <h3 class=seccion>Aquí se pueden gestionar los usuarios</h3>
+    {% if error %}
+        <h3 class=seccion style="color: white; background-color: red;">{{error}}</h3>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+<div class="cabecera-tabla">
+    <span class="edit-tabla">Crear nuevo usuario</span>
+    <span class="edit-tabla">  
+        <form action="{{url_for('addUsuarios')}}" method="get">
+            <div class="boton-tabla"><button type="submit" class="btn btn-primary"><img class="icono-boton" src="{{ url_for('static', filename='img/anadir.png') }}" alt="anadir" />Añadir</button></div>    
+        </form>
+    </span>
+</div>
+
+<table class="table table-bordered table-sm">
+    <thead><th>Id</th><th>Nombre</th><th>Apellidos</th><th>Teléfono</th><th>Acciones</th></thead>
+    <tbody>
+    {% for usuario in usuarios %}
+        {% if add == 'edit' and usuario['idclient'] == idclientEdit %}
+            <tr>
+                <form action="{{url_for('editedUsuario')}}" method="get">
+                    <input type="hidden" name="id_edit" id="id_edit" value="{{usuario['idclient']}}">
+                    <td>{{usuario['idclient']}}</td>
+                    <td><input type="text" name="newname" id="newname" value="{{usuario['nom']}}"></td>
+                    <td><input type="text" name="newapellidos" id="newapellidos" value="{{usuario['llinatges']}}"></td>
+                    <td><input type="text" name="newtelefono" id="newtelefono" value="{{usuario['telefon']}}"></td>
+                    <td><input type="submit"></td>
+                </form>
+            </tr>
+        {% else %}
+            <tr>
+                <td>{{usuario['idclient']}}</td>
+                <td>{{usuario['nom']}}</td>
+                <td>{{usuario['llinatges']}}</td>
+                <td>{{usuario['telefon']}}</td>
+                <td>
+                    <a href="{{url_for('removeUsuario')}}?id_remove={{usuario['idclient']}}"><img src="{{url_for('static', filename = 'img/remove.png')}}" width="20" alt="remove user"></a>
+                    <a href="{{url_for('editUsuario')}}?id_edit={{usuario['idclient']}}"><img src="{{url_for('static', filename = 'img/edit.png')}}" width="20" alt="edit user"></a>
+                </td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+    {% if add == True %}
+        <tr>
+            <form action="{{url_for('usuarioAdded')}}" method="get">
+                <td></td>
+                <td><input type="text" name="newname" id="newname"></td>
+                <td><input type="text" name="newapellidos" id="newapellidos"></td>
+                <td><input type="text" name="newtelefono" id="newtelefono"></td>
+                <td><input type="submit"></td>
+            </form>
+        </tr>
+    {% endif %}
+</tbody>
+</table>
+{% endblock %}
+
+
+{% block footer %}
+
+{% endblock %}

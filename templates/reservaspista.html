@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+<!--Header-->
+{% block header %}
+    <h3 class=folder>Aquí se puede ver el calendario de reservas</h3>
+{% endblock %}
+
+{% block main %}
+<h2> Reservas </h2>
+<div>
+    <span><a href="{{ url_for('semanamenos', fechaInicioMenos = fechaInicio)}}"><img src="{{ url_for ('static', filename='img/left.png' )}}" alt="flechaIzquierda"></a></span>
+    <span id="tituloSemana">Semana del {{fechaInicio}} al {{fechaFin}}</span>
+    <span><a href="{{ url_for('semanamas', fechaInicioMas = fechaInicio) }}"><img src="{{ url_for ('static', filename='img/right.png' )}}" alt="flechaDerecha"></a></span>
+</div>
+
+<table class="table table-bordered table-sm">
+    <thead><th></th><th>Dilluns</th><th>Dimarts</th><th>Dimecres</th><th>Dijous</th><th>Divendres</th></thead>
+    <tbody>
+    {% for h in range(0,6) %}
+        <tr><th>{{h + 15}}:00</th>
+            {% for d in range(0,5) %}
+                <td>{{tablaReservas[d][h]}}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

@@ -1,0 +1,57 @@
+html{
+    margin-left: auto;
+    margin-right: auto;
+    width: 50em;
+}
+
+nav li {
+    float: left;
+}
+
+nav ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #0493f9;
+}
+
+nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav li a:hover {
+    background-color: #2ba2e2;
+  }
+
+.cabecera-tabla{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #b7dcf0;
+}
+
+.edit-tabla{
+    padding-left: 5px;
+    display: inline;
+}
+
+.boton-tabla{
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.icono-boton{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+#tituloSemana{
+    font-size: 1.5em;
+}

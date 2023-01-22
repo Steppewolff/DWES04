@@ -1,0 +1,42 @@
+{% extends 'layout_usuarios.html' %}
+
+{% block header %}
+    <h3 class=seccion>Introduzca sus datos para darse de alta como usuario</h3>
+{% endblock %}
+
+{% block main %}
+    <form method="POST">
+        {# This hidden_tag is a CSRF security feature. #}
+        {{ formularioAlta.hidden_tag() }}
+        {{ formularioAlta.username.label }} {{ formularioAlta.username }}
+        {% for error in formularioAlta.username.errors %} {{ error }} {% endfor%}
+        <br>
+        {{ formularioAlta.name.label }} {{ formularioAlta.name }}
+        {% for error in formularioAlta.name.errors %} {{ error }} {% endfor%}
+        <br>
+        {{ formularioAlta.surname.label }} {{ formularioAlta.surname }}
+        {% for error in formularioAlta.surname.errors %} {{ error }} {% endfor%}
+        <br>
+        {{ formularioAlta.password.label }} {{ formularioAlta.password }}
+        {% for error in formularioAlta.password.errors %} {{ error }} {% endfor%}
+        <br>
+        {{ formularioAlta.passwordRep.label }} {{ formularioAlta.passwordRep }}
+        {% for error in formularioAlta.passwordRep.errors %} {{ error }} {% endfor%}
+        <br>
+        {{ formularioAlta.joinDate.label }} {{ formularioAlta.joinDate }}
+        {% for error in formularioAlta.joinDate.errors %} {{ error }} {% endfor%}
+        <br>
+        {{ formularioAlta.email.label }} {{ formularioAlta.email }}
+        {% for error in formularioAlta.email.errors %} {{ error }} {% endfor%}
+        <br>
+        {{ formularioAlta.phoneNumber.label }} {{ formularioAlta.phoneNumber }}
+        {% for error in formularioAlta.phoneNumber.errors %} {{ error }} {% endfor%}
+        <br>
+
+        <input type="submit" value="Aceptar">
+    </form>
+{% endblock %}
+
+{% block footer %}
+{{ newusername }}
+{% endblock %}

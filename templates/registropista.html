@@ -31,14 +31,6 @@
                     {% endfor %}
                 </select>
             </div>
-        <h3> Usuario</h3>
-            <div>
-                <select name="usuario" id="usuario">
-                    {% for usuario in usuarios %}
-                        <option value="{{usuario['idclient']}}">{{usuario['nom']}} {{usuario['llinatges']}}</option>
-                    {% endfor %}
-                </select> 
-            </div>
             <input type="submit" value="Enviar" name="enviar" style="margin-right: 5px; width: 60px; height:30px; font-weight: bold">
             <input type="reset" value="Limpiar" style="width: 60px; height:30px; font-weight: bold">
     </form>

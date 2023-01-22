@@ -1,7 +1,7 @@
 html{
     margin-left: auto;
     margin-right: auto;
-    width: 50em;
+    width: 60em;
 }
 
 nav li {
@@ -50,6 +50,10 @@ nav li a:hover {
     width: 20px;
     height: 20px;
     margin-right: 10px;
+}
+
+#logout{
+    background-color: red;
 }
 
 #tituloSemana{

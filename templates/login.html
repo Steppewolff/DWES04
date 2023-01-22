@@ -1,0 +1,39 @@
+{% extends 'layout_usuarios.html' %}
+
+{% block header %}
+    <h3 class=seccion>Bienvenido a la aplicación DWES04 para reservar pistas</h3>
+    {% if newusername %}
+        <div>
+            <p class="feedback">El usuario {{newusername}} se ha creado correctamente</p>
+        </div>
+    {% endif %}
+    {% if error %}
+    <div>
+        <p class="feedback">{{error}}</p>
+    </div>
+    {% endif %}
+    {% if message %}
+    <div>
+        <p class="feedback">{{message}}</p>
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+    <form action="{{url_for('loginVal')}}" method="get">
+        <div class="form-check form-check-inline">
+            <label for="usuario">Usuario:</label>
+            <input type="text" id="usuario" name="usuario" value={{newusuario}}>
+        </div>
+        <div class="form-check form-check-inline">
+            <label for="pwd">Contraseña:</label>
+            <input type="text" id="pwd" name="pwd">
+        </div>
+        <input type="submit" value="Enviar" name="enviar" style="margin-right: 5px; height:30px; font-weight: bold">
+        <input type="submit" value="Crear nuevo usuario" name="nuevo" formaction="{{url_for('signForm')}}" style="margin-right: 5px; height:30px; font-weight: bold">
+        <input type="reset" value="Limpiar" style="height:30px; font-weight: bold">
+    </form>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

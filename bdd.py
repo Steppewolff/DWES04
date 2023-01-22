@@ -9,7 +9,7 @@ class Reservas(object):
             port=3306,
             user='root',
             passwd='0Castorp0',
-            db='dwes03',
+            db='dwes04',
             charset='utf8mb4',
             autocommit=True,
             cursorclass=pymysql.cursors.DictCursor
@@ -19,7 +19,7 @@ class Reservas(object):
         cursor = db.cursor()
 
         #Query para MySQL
-        sql  = "SELECT * from dwes03.pistes"
+        sql  = "SELECT * from dwes04.pistes"
         cursor.execute(sql)
         resQueryTipos = cursor.fetchall()
         db.close()
@@ -32,7 +32,7 @@ class Reservas(object):
             port=3306,
             user='root',
             passwd='0Castorp0',
-            db='dwes03',
+            db='dwes04',
             charset='utf8mb4',
             autocommit=True,
             cursorclass=pymysql.cursors.DictCursor
@@ -42,7 +42,7 @@ class Reservas(object):
         cursor = db.cursor()
 
         #Query para MySQL
-        sql  = "SELECT tipo from dwes03.pistes WHERE idpista = " + str(idpista) + ";"
+        sql  = "SELECT tipo from dwes04.pistes WHERE idpista = " + str(idpista) + ";"
         cursor.execute(sql)
         resQueryPista = cursor.fetchall()
         db.close()
@@ -55,7 +55,7 @@ class Reservas(object):
             port=3306,
             user='root',
             passwd='0Castorp0',
-            db='dwes03',
+            db='dwes04',
             charset='utf8mb4',
             autocommit=True,
             cursorclass=pymysql.cursors.DictCursor
@@ -65,20 +65,20 @@ class Reservas(object):
         cursor = db.cursor()
 
         #Query para MySQL
-        sql  = "SELECT * from dwes03.clients"
+        sql  = "SELECT * from dwes04.usuaris"
         cursor.execute(sql)
         resQueryClients = cursor.fetchall()
         db.close()
         return resQueryClients 
 
-    def getUsuario(idclient):
+    def getUsuario(idusuari):
         #Conectarse a la BDD
         db = pymysql.connect(
             host='127.0.0.1',
             port=3306,
             user='root',
             passwd='0Castorp0',
-            db='dwes03',
+            db='dwes04',
             charset='utf8mb4',
             autocommit=True,
             cursorclass=pymysql.cursors.DictCursor
@@ -88,7 +88,7 @@ class Reservas(object):
         cursor = db.cursor()
 
         #Query para MySQL
-        sql  = "SELECT nom, llinatges from dwes03.clients WHERE idclient = " + str(idclient) + ";"
+        sql  = "SELECT nom, llinatges from dwes04.usuaris WHERE idusuari = " + str(idusuari) + ";"
         cursor.execute(sql)
         resQueryClient = cursor.fetchall()
         db.close()
@@ -101,7 +101,7 @@ class Reservas(object):
             port=3306,
             user='root',
             passwd='0Castorp0',
-            db='dwes03',
+            db='dwes04',
             charset='utf8mb4',
             autocommit=True,
             cursorclass=pymysql.cursors.DictCursor
@@ -111,21 +111,25 @@ class Reservas(object):
         cursor = db.cursor()
 
         #Query para MySQL
-        sql  = "SELECT MAX(" + column + ") FROM dwes03." + table + ";"
+        sql  = "SELECT MAX(" + column + ") FROM dwes04." + table + ";"
         cursor.execute(sql)
         resQuery = cursor.fetchall()
         columnValue = resQuery[0]
+        if columnValue['MAX(idusuari)'] == None:
+            nextID = 1
+        else:
+            nextID = columnValue['MAX(idusuari)'] + 1
         db.close()
-        return columnValue 
+        return nextID 
 
-    def addUsuario(newID, newname, newapellidos, newtelefono):
+    def addUsuario(newID, newusername, newname, newsurname, newpassword, newjoinDate, newemail, newphoneNumber):
         #Conectarse a la BDD
         db = pymysql.connect(
             host='127.0.0.1',
             port=3306,
             user='root',
             passwd='0Castorp0',
-            db='dwes03',
+            db='dwes04',
             charset='utf8mb4',
             autocommit=True,
             cursorclass=pymysql.cursors.DictCursor
@@ -134,58 +138,11 @@ class Reservas(object):
         #Creo un objeto cursor para recibir la información de la query
         cursor = db.cursor()
 
-        #Query para MySQL
-        sql  = "INSERT INTO dwes03.clients VALUES (" + str(newID) + ", '" + newname +"', '" + newapellidos + "', '" + newtelefono + "')"
+        sql  = "INSERT INTO dwes04.usuaris VALUES (" + str(newID) + ", '" + newusername + "', '" + newname +"', '" + newsurname + "', '" + str(newpassword) + "', '" + str(newjoinDate) + "', '" + str(newemail) + "', '" + newphoneNumber + "');"
         cursor.execute(sql)
         resQueryClientAdded = cursor.fetchall()
         db.close()
         return cursor.lastrowid 
-
-    def removeUsuario(idclient):
-        #Conectarse a la BDD
-        db = pymysql.connect(
-            host='127.0.0.1',
-            port=3306,
-            user='root',
-            passwd='0Castorp0',
-            db='dwes03',
-            charset='utf8mb4',
-            autocommit=True,
-            cursorclass=pymysql.cursors.DictCursor
-        )
-        
-        #Creo un objeto cursor para recibir la información de la query
-        cursor = db.cursor()
-
-        #Query para MySQL
-        sql  = "DELETE FROM dwes03.clients WHERE idclient = " + str(idclient) + ";"
-        cursor.execute(sql)
-
-        db.close()
-        return cursor.lastrowid
-
-    def editUsuario(idclient, newname, newapellidos, newtelefono):
-        #Conectarse a la BDD
-        db = pymysql.connect(
-            host='127.0.0.1',
-            port=3306,
-            user='root',
-            passwd='0Castorp0',
-            db='dwes03',
-            charset='utf8mb4',
-            autocommit=True,
-            cursorclass=pymysql.cursors.DictCursor
-        )
-        
-        #Creo un objeto cursor para recibir la información de la query
-        cursor = db.cursor()
-
-        #Query para MySQL
-        sql  = "UPDATE dwes03.clients SET nom = '" + newname + "', llinatges = '" + newapellidos + "', telefon = '" + newtelefono + "' WHERE idclient = " + str(idclient) + ";"
-        cursor.execute(sql)
-
-        db.close()
-        return cursor.lastrowid
 
     def cargarReservas(fechaInicio):
         #Conectarse a la BDD
@@ -194,7 +151,7 @@ class Reservas(object):
             port=3306,
             user='root',
             passwd='0Castorp0',
-            db='dwes03',
+            db='dwes04',
             charset='utf8mb4',
             autocommit=True,
             cursorclass=pymysql.cursors.DictCursor
@@ -205,7 +162,7 @@ class Reservas(object):
 
         #Query para MySQL
         fechaFin = fechaInicio + datetime.timedelta(days = 4)
-        sql  = "SELECT * from dwes03.reserves WHERE data BETWEEN '" + str(fechaInicio) + "' and '" + str(fechaFin) + "';"
+        sql  = "SELECT * from dwes04.reserves WHERE data BETWEEN '" + str(fechaInicio) + "' and '" + str(fechaFin) + "';"
         cursor.execute(sql)
         resQueryReserves = cursor.fetchall()
         db.close()
@@ -218,7 +175,7 @@ class Reservas(object):
             port=3306,
             user='root',
             passwd='0Castorp0',
-            db='dwes03',
+            db='dwes04',
             charset='utf8mb4',
             autocommit=True,
             cursorclass=pymysql.cursors.DictCursor
@@ -226,9 +183,11 @@ class Reservas(object):
         
         #Creo un objeto cursor para recibir la información de la query
         cursor = db.cursor()
-
+        print('dia:', dia)
+        print('hora:', hora)
+        print('pista:', tipopista)
         #Query para MySQL
-        sql  = "SELECT idpista, idclient from dwes03.reserves where data = '" + dia + " " + hora +":00:00' and idpista = " + str(tipopista) + ";"
+        sql  = "SELECT idpista, idclient from dwes04.reserves where data = '" + dia + " " + hora +":00:00' and idpista = " + str(tipopista) + ";"
 
         cursor.execute(sql)
         resQueryReserves = cursor.fetchall()
@@ -242,7 +201,7 @@ class Reservas(object):
             port=3306,
             user='root',
             passwd='0Castorp0',
-            db='dwes03',
+            db='dwes04',
             charset='utf8mb4',
             autocommit=True,
             cursorclass=pymysql.cursors.DictCursor
@@ -252,7 +211,7 @@ class Reservas(object):
         cursor = db.cursor()
 
         #Query para MySQL
-        sql  = "INSERT INTO dwes03.reserves VALUES ('" + dia + " " + hora +":00:00', " + tipopista + ", " + usuario + ")"
+        sql  = "INSERT INTO dwes04.reserves VALUES ('" + dia + " " + hora +":00:00', " + tipopista + ", " + usuario + ")"
         cursor.execute(sql)
         db.commit()
         db.close()
